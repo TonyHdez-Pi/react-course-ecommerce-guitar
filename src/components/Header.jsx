@@ -2,8 +2,13 @@
 // eslint-disable-next-line no-unused-vars
 import { useMemo } from "react";
 
-export default function Header({ cart, removeFromCart, increaseQuantity }) {
-	console.log("tipo de increase " + typeof increaseQuantity);
+export default function Header({
+	cart,
+	removeFromCart,
+	increaseQuantity,
+	decreseQuantity,
+	clearCart,
+}) {
 	// state derivado, sirve simplemente para sacar la logica
 	// de dentro del componente y dejarla mas arriba, donde debe de ir
 	// aqui usamos useMemo para evitar andar haciendo calculos
@@ -61,7 +66,11 @@ export default function Header({ cart, removeFromCart, increaseQuantity }) {
 														<td>{guitar.name}</td>
 														<td className="fw-bold">${guitar.price}</td>
 														<td className="flex align-items-start gap-4">
-															<button type="button" className="btn btn-dark">
+															<button
+																type="button"
+																className="btn btn-dark"
+																onClick={() => decreseQuantity(guitar.id)}
+															>
 																-
 															</button>
 															{guitar.quantity}
@@ -94,7 +103,10 @@ export default function Header({ cart, removeFromCart, increaseQuantity }) {
 									</>
 								)}
 
-								<button className="btn btn-dark w-100 mt-3 p-2">
+								<button
+									className="btn btn-dark w-100 mt-3 p-2"
+									onClick={clearCart}
+								>
 									Vaciar Carrito
 								</button>
 							</div>
