@@ -5,9 +5,13 @@ import Header from "./components/Header";
 import Guitar from "./components/Guitar";
 
 function App() {
+	const initial = () => {
+		const savedCart = localStorage.getItem("cart");
+		return savedCart ? JSON.parse(savedCart) : [];
+	};
 	// eslint-disable-next-line no-unused-vars
 	const [data, setData] = useState(db);
-	const [cart, setCart] = useState([]);
+	const [cart, setCart] = useState(initial);
 
 	const MAX_ITEMS = 8;
 	const MIN_ITEMS = 1;
