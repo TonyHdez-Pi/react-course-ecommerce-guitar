@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { db } from "../data/db";
 
 export const useCart = () => {
@@ -68,6 +68,16 @@ export const useCart = () => {
 	function clearCart() {
 		setCart([]);
 	}
+
+	// state derivado, sirve simplemente para sacar la logica
+	// de dentro del componente y dejarla mas arriba, donde debe de ir
+	// aqui usamos useMemo para evitar andar haciendo calculos
+	// cada vez que se renderice el componente.
+	const isEmpty = useMemo(() => cart.length === 0, [cart]);
+	const cartTotal = useMemo(
+		() => cart.reduce((total, item) => total + item.quantity * item.price, 0),
+		[cart]
+	);
 	return {
 		data,
 		cart,
@@ -76,5 +86,7 @@ export const useCart = () => {
 		increaseQuantity,
 		decreseQuantity,
 		clearCart,
+		isEmpty,
+		cartTotal,
 	};
 };

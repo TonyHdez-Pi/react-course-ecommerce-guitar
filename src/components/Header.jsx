@@ -1,23 +1,15 @@
 /* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
-import { useMemo } from "react";
-
+import { useCart } from "../hooks/useCart";
 export default function Header({
 	cart,
 	removeFromCart,
 	increaseQuantity,
 	decreseQuantity,
 	clearCart,
+	isEmpty,
+	cartTotal,
 }) {
-	// state derivado, sirve simplemente para sacar la logica
-	// de dentro del componente y dejarla mas arriba, donde debe de ir
-	// aqui usamos useMemo para evitar andar haciendo calculos
-	// cada vez que se renderice el componente.
-	const isEmpty = useMemo(() => cart.length === 0, [cart]);
-	const cartTotal = useMemo(
-		() => cart.reduce((total, item) => total + item.quantity * item.price, 0),
-		[cart]
-	);
 	return (
 		<header className="py-5 header">
 			<div className="container-xl">
