@@ -5,6 +5,8 @@ import Header from "./components/Header";
 import Guitar from "./components/Guitar";
 
 function App() {
+	// funcion para checar si tenemos algo en local storage y si si,
+	// ponerlo en el carrito, asi no perdemos esa informacion.
 	const initial = () => {
 		const savedCart = localStorage.getItem("cart");
 		return savedCart ? JSON.parse(savedCart) : [];
